@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K17-TDR</title>
+<style>
+/* ======= RESET & BASE ======= */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+body { line-height:1.6; background:#f5f5f5; color:#0d0d0d; }
+
+/* ======= HEADER / NAV ======= */
+header { background:#0077FF; color:#fff; padding:15px 0; position:sticky; top:0; z-index:1000; }
+nav { display:flex; justify-content:space-between; align-items:center; width:90%; margin:0 auto; position:relative; }
+nav .logo { font-size:1.8em; font-weight:bold; }
+nav ul { list-style:none; display:flex; }
+nav ul li { margin-left:20px; }
+nav ul li a { color:#fff; text-decoration:none; font-weight:500; }
+nav ul li a:hover { text-decoration:underline; }
+.menu-toggle { display:none; font-size:1.8em; cursor:pointer; }
+ul { list-style:none; display:flex; }
+ul li { margin-left:20px; }ul li a { color:#fff; text-decoration:none; font-weight:500; }
+
+/* ======= HERO ======= */
+.hero { background:url('hero.jpg') center/cover no-repeat; height:90vh; display:flex; align-items:center; justify-content:center; text-align:center; color:#fff; flex-direction:column; padding:0 20px; position:relative; }
+.hero::before { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:0; }
+.hero h1, .hero p, .hero .btn { position:relative; z-index:1; opacity:0; transform:translateY(20px); animation: fadeUp 1s forwards; }
+.hero h1 { animation-delay:0.2s; font-size:3em; margin-bottom:10px; }
+.hero p { animation-delay:0.5s; font-size:1.2em; margin-bottom:20px; max-width:600px; }
+.hero .btn { animation-delay:0.8s; background:#fff; color:#0077FF; padding:12px 25px; border:none; margin:5px; cursor:pointer; font-weight:bold; border-radius:5px; transition:0.3s; }
+.hero .btn:hover { background:#e0e0e0; }
+
+@keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+/* ======= SECTIONS ======= */
+section { padding:60px 0; width:90%; margin:0 auto; }
+
+/* ======= ABOUT / PRESENTATION ======= */
+.presentation, .about { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px; }
+.presentation img, .about img { width:300px; border-radius:10px; }
+.presentation div, .about div { flex:1; min-width:250px; }
+
+/* ======= SERVICES ======= */
+.services { text-align:center; }
+.services h2 { margin-bottom:40px; font-size:2.2em; color:#0077FF; }
+.service-boxes { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+.service-box { background:#fff; padding:25px; border-radius:10px; flex:1 1 250px; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:0.5s; transform:translateY(20px); opacity:0; }
+.service-box.visible { transform:translateY(0); opacity:1; }
+.service-box:hover { transform:scale(1.05); box-shadow:0 10px 20px rgba(0,0,0,0.2); }
+.service-box h3 { margin-bottom:15px; color:#0077FF; }
+
+/* ======= BLOG / ARTICLES ======= */
+.articles h2 { text-align:center; margin-bottom:40px; font-size:2em; color:#0077FF; }
+.article-grid { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+.article { background:#fff; flex:1 1 300px; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:0.5s; opacity:0; transform:translateY(20px); }
+.article.visible { opacity:1; transform:translateY(0); }
+.article img { width:100%; height:200px; object-fit:cover; }
+.article-content { padding:15px; }
+.article-content h3 { margin-bottom:10px; color:#0077FF; }
+.article-content p { font-size:0.95em; margin-bottom:10px; }
+.article-content a { color:#0077FF; text-decoration:none; font-weight:bold; }
+.article-content a:hover { text-decoration:underline; }
+.article:hover { transform:scale(1.03); box-shadow:0 8px 16px rgba(0,0,0,0.15); }
+
+/* ======= BARRE DE RECHERCHE ======= */
+#search { padding:10px; width:300px; border-radius:5px; border:1px solid #ccc; }
+
+/* ======= CONTACT ======= */
+.contact form { background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:15px; }
+.contact form input, .contact form textarea { padding:12px; border-radius:5px; border:1px solid #ccc; }
+.contact form button { background:#0077FF; color:#fff; border:none; padding:12px; border-radius:5px; cursor:pointer; font-weight:bold; }
+.contact form button:hover { background:#005bb5; }
+
+/* ======= FOOTER ======= */
+footer { background:#0d0d0d; color:#fff; text-align:center; padding:20px 0; margin-top:40px; }
+
+/* ======= RESPONSIVE ======= */
+@media (max-width:768px){
+  nav ul { display:none; flex-direction:column; background:#0077FF; position:absolute; top:60px; right:0; width:200px; padding:10px; border-radius:5px; }
+  nav ul.active { display:flex; }
+  .menu-toggle { display:block; color:#fff; }
+  .presentation, .about, .service-boxes, .article-grid { flex-direction:column; align-items:center; }
+  .hero h1 { font-size:2.2em; }
+  .hero p { font-size:1em; }
+}
+</style>
+<script scr="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" ></script>
+</head>
+<body>
+
+<!-- HEADER / NAV -->
+<header>
+  <nav>
+     <ul class="log">
+      <li><a href="test_inscription_connexion.html">S'inscrire</a></li>
+      <li><a href="test_inscription_connexion.html">Se connecter</a></li>
+    </ul>
+    <div class="logo">K17-TDR</div>
+    
+    <div class="menu-toggle">&#9776;</div>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="A_propos.html">À propos</a></li>
+      <li><a href="Services.html">Services</a></li>
+      <li><a href="Blog.html">Blog</a></li>
+      <li><a href="Contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+ 
+<!-- HERO -->
+<section class="hero" id="hero">
+  <h1>Bienvenue sur K17-TDR</h1>
+  <p>Nous partageons mes projets, inspirations et services pour aider à créer un monde plus connecté et créatif.</p>
+  <button class="btn" onclick="location.href='#services'">Découvrir nos services</button>
+  <button class="btn" onclick="location.href='A_propos.html'">En savoir plus</button>
+</section>
+
+<!-- PRESENTATION / ABOUT -->
+<section class="presentation about" id="about">
+  <!--<img src="Portrait.png" alt="Kypen 17">-->
+  <div>
+    <h2>Qui sommes-nous ?</h2>
+    <p>Nous <strong>K17-TDR</strong> (K17 Tech, digital et recherche). Nous partageons nos projets, expériences et créations pour inspirer les jeunes ambitieux.</p>
+    <p><strong>Mission :</strong> Inspirer et aider les jeunes à se développer grâce au digital et la créativité.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <h2>Nos Services</h2>
+  <div class="service-boxes">
+    <div class="service-box">
+      <h3>📱 Community Management</h3>
+      <p>Gestion complète de pages Facebook & Instagram : contenu, interactions et analyse.</p>
+    </div>
+    <div class="service-box">
+      <h3>💡 Création de contenu</h3>
+      <p>Design d’images, Reels et publications adaptées à votre audience.</p>
+    </div>
+    <div class="service-box">
+      <h3>🎯 Stratégie digitale</h3>
+      <p>Conseils personnalisés pour booster ta présence en ligne et atteindre tes objectifs.</p>
+    </div>
+    <div class="service-box">
+      <h3>🧠 Formation & partage</h3>
+      <p>Nous partageons nos apprentissages pour inspirer d’autres créateurs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG / ARTICLES -->
+<section class="articles" id="articles">
+  <h2>Derniers articles</h2>
+  
+  <!-- BARRE DE RECHERCHE -->
+  <div style="text-align:center; margin-bottom:30px;">
+    <input type="text" id="search" placeholder="Rechercher un article...">
+  </div>
+  
+  <div class="article-grid" id="article-grid">
+    <!-- Les articles seront générés via JS -->
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2 style="text-align:center;margin-bottom:20px;color:#0077FF;">Contactez-nous</h2>
+  <form>
+    <input type="text" placeholder="Nom complet" required>
+    <input type="email" placeholder="Email" required>
+    <textarea rows="5" placeholder="Message" required></textarea>
+    <button type="submit">Envoyer</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 K17-TDR. Tous droits réservés.</p>
+</footer>
+
+<!-- JS MENU + ARTICLES + ANIMATIONS + RECHERCHE -->
+<script>
+
+        
+
+
+// MENU MOBILE
+const menuToggle = document.querySelector('.menu-toggle');
+const navUl = document.querySelector('nav ul');
+menuToggle.addEventListener('click', () => navUl.classList.toggle('active'));
+
+// ARTICLES SIMULÉS
+const articles = [
+  { title:"Créer un site WordPress facilement",  excerpt:"Découvrez étape par étape comment créer votre site WordPress rapidement."},
+  { title:"10 astuces pour progresser en programmation", excerpt:"Apprenez les techniques pour devenir un programmeur efficace et autonome."},
+  { title:"L’importance de la créativité digitale",  excerpt:"Comment la créativité transforme vos projets numériques."},
+  { title:"Notre routine pour apprendre l’IA",  excerpt:"Découvrez notre méthode pour progresser rapidement en intelligence artificielle."},
+  { title:"Comment organiser un blog pro",  excerpt:"Optimisez votre blog pour attirer plus de visiteurs et partager vos projets."}
+];
+
+const articleGrid = document.getElementById('article-grid');
+articles.forEach(a => {
+  const div = document.createElement('div');
+  div.classList.add('article');
+  div.innerHTML = `
+    <alt="${a.title}">
+    <div class="article-content">
+      <h3>${a.title}</h3>
+      <p>${a.excerpt}</p>
+      <a href="#">Lire la suite</a>
+    </div>
+  `;
+  articleGrid.appendChild(div);
+});
+
+// ANIMATION AU SCROLL
+const serviceBoxes = document.querySelectorAll('.service-box');
+const articlesEl = document.querySelectorAll('.article');
+
+function animateOnScroll() {
+  const triggerBottom = window.innerHeight * 0.85;
+  serviceBoxes.forEach(box => { if(box.getBoundingClientRect().top < triggerBottom) box.classList.add('visible'); });
+  articlesEl.forEach(article => { if(article.getBoundingClientRect().top < triggerBottom) article.classList.add('visible'); });
+}
+window.addEventListener('scroll', animateOnScroll);
+animateOnScroll();
+
+// RECHERCHE DYNAMIQUE
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('keyup', () => {
+  const filter = searchInput.value.toLowerCase();
+  articlesEl.forEach(article => {
+    const title = article.querySelector('h3').textContent.toLowerCase();
+    const excerpt = article.querySelector('p').textContent.toLowerCase();
+    article.style.display = (title.includes(filter) || excerpt.includes(filter)) ? '' : 'none';
+  });
+});
+</script>
+</body>
+</html>

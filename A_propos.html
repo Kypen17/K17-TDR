@@ -1,0 +1,123 @@
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K17-TDR</title>
+
+<style>
+
+/* ======= RESET & BASE ======= */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+body { line-height:1.6; background:#f5f5f5; color:#0d0d0d; }
+
+/* ======= HEADER / NAV ======= */
+header { background:#0077FF; color:#fff; padding:15px 0; position:sticky; top:0; z-index:1000; }
+nav { display:flex; justify-content:space-between; align-items:center; width:90%; margin:0 auto; position:relative; }
+nav .logo { font-size:1.8em; font-weight:bold; }
+nav ul { list-style:none; display:flex; }
+nav ul li { margin-left:20px; }
+nav ul li a { color:#fff; text-decoration:none; font-weight:500; }
+nav ul li a:hover { text-decoration:underline; }
+.menu-toggle { display:none; font-size:1.8em; cursor:pointer; }
+ul { list-style:none; display:flex; }
+ul li { margin-left:20px; }ul li a { color:#fff; text-decoration:none; font-weight:500; }
+
+/* ======= ABOUT / PRESENTATION ======= */
+.presentation, .about, .about h1 { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px; }
+.presentation img, .about img { width:300px; border-radius:10px; }
+.presentation div, .about div { flex:1; min-width:250px; }
+
+/* ======= FOOTER ======= */
+footer { background:#0d0d0d; color:#fff; text-align:center; padding:20px 0; margin-top:40px; }
+
+/* ======= RESPONSIVE ======= */
+@media (max-width:768px){
+  nav ul { display:none; flex-direction:column; background:#0077FF; position:absolute; top:60px; right:0; width:200px; padding:10px; border-radius:5px; }
+  nav ul.active { display:flex; }
+  .menu-toggle { display:block; color:#fff; }
+  .presentation, .about, .service-boxes, .article-grid { flex-direction:column; align-items:center; }
+  .hero h1 { font-size:2.2em; }
+  .hero p { font-size:1em; }
+}
+
+</style>
+    </head>
+    <body>
+        <!-- HEADER / NAV -->
+<header>
+  <nav>
+     <ul class="log">
+      <li><a href="test_inscription_connexion.html">S'inscrire</a></li>
+      <li><a href="test_inscription_connexion.html">Se connecter</a></li>
+    </ul>
+    <div class="logo">K17-TDR</div>
+    
+    <div class="menu-toggle">&#9776;</div>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="A_propos.html">À propos</a></li>
+      <li><a href="Services.html">Services</a></li>
+      <li><a href="Blog.html">Blog</a></li>
+      <li><a href="Contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- PRESENTATION / ABOUT -->
+<section class="presentation about" id="about">
+   <img src="Portrait.png" alt="Kypen 17">  
+    <P><h1>L’Esprit ne dort jamais. Et votre réussite non plus.</h1></P>
+  <div>
+    <h2>Qui sommes-nous ?</h2>
+    <p>Nous sommes <strong>K17-TDR</strong>, l'agence digitale qui croit que les grandes idées méritent des solutions concrètes, accessibles et innovantes.</p>
+    <p>Née de la passion pour la technologie, notre mission est simple : vous offrir les outils digitaux dont vous avez besoin pour grandir, sans complexité ni investissement démesuré.</p>
+<br>
+<strong>Notre Philosophie</strong> : "L'Esprit en Éveil Permanent"
+L’esprit ne dort jamais – ce n’est pas qu’une phrase. C’est notre état d’esprit au quotidien.
+<p>Pendant que vous vous concentrez sur votre métier, nous restons en veille :
+
+Veille technologique pour vous proposer les solutions les plus pertinentes.
+Veille créative pour que votre identité digitale vous ressemble et vous démarque.
+Veille stratégique pour anticiper les tendances et opportunités de votre marché.
+
+Nous sommes le partenaire qui travaille quand vous vous reposez, pour que chaque jour, votre entreprise avance.</p>
+<br>
+<strong>Notre Équipe</strong> : Une équipe passionnée, multidisciplinaire et complémentaire :
+
+<p>👨💻 Les Techs : Développeurs, intégrateurs, spécialistes IA et automatisation.</p>
+<p>🎨 Les Créatifs : Designers, vidéastes, graphistes et storytellers.</p>
+<p>📈 Les Stratèges : Experts en marketing digital, acquisition clients et expérience utilisateur.</p>
+<p>🤝 Les Relais : Community managers, chargés de clientèle et facilitateurs.</p>
+
+<br>
+<strong> Nous partageons tous la même conviction : votre succès est notre succès.</strong>
+<br>
+<br>
+
+<strong>Notre Cible</strong> : Nous nous adressons principalement aux :
+
+<p>🚀 Startups en phase de lancement ou de croissance.</p>
+<p>👨💼 Petits entrepreneurs et indépendants qui veulent se digitaliser.</p>
+<p>🏢 TPE/PME locales souhaitant renforcer leur présence en ligne.</p>
+<p>🌍 Porteurs de projet africains cherchant un partenaire tech compréhensif et compétent.</p>
+
+<br>
+<strong>Nos Valeurs</strong>
+<br>
+
+<p>🔥 Passion & Persévérance : Nous croyons en vos projets comme au nôtre.</p>
+<p>🎯 Excellence Accessible : Le professionnalisme ne doit pas être un luxe.</p>
+<p>🤝 Transparence & Confiance : Une relation honnête est la base de tout.</p>
+<p>🌱 Apprentissage Continu : Nous grandissons ensemble, en apprenant chaque jour.</p>
+<p>💡 Innovation Pragmatique : Des solutions smart, pas des gadgets.</p>
+
+</div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 K17-TDR. Tous droits réservés.</p>
+</footer>
+    </body>
+</html>
